@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppArticulos.Models;
+using WebAppArticulos.Repositories;
 
 namespace WebAppArticulos
 {
@@ -26,8 +27,10 @@ namespace WebAppArticulos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //agregar el contexto
             services.AddDbContext<ArticuloContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ArticuloSqlConnection")));
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
